@@ -30,7 +30,7 @@ const {
       const repoInput = core.getInput("repo");
       const branchInput = core.getInput("branch");
 
-      const repoName = org && repoInput? `${orgInput}/${repoInput}` : repo;
+      const repoName = orgInput && repoInput? `${orgInput}/${repoInput}` : repo;
       const branchName = branchInput || branch.split('/').pop();
       console.log({
         repoName,
