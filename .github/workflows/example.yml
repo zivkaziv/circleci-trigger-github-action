@@ -16,6 +16,4 @@ jobs:
         uses: zivkaziv/circleci-trigger-github-action@master
         with:
           token: ${{ secrets.CIRCLE_CI_TOKEN }}
-          org: TwiztedDesign
-          repo: videoflow-automation
           branch: master
