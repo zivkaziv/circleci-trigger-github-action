@@ -30,8 +30,12 @@ const {
       const repoInput = core.getInput("repo");
       const branchInput = core.getInput("branch");
 
+      const repoName = org && repo? `${org}/${repo}` : repo;
+      const branchName = bra;nch.split('/').pop();
       console.log({
+        repoName,
         repo,
+        branchName,
         branch,
         token,
         org,
@@ -55,8 +59,8 @@ const {
   })();
   
   async function postCircleciAction({ token, org, repo, branch }) {
-      const branchName = org && repo? `${org}/${repo}` : process.env.GITHUB_REPOSITORY
-    return await axios.post(`https://circleci.com/api/v1.1/project/github/${branchName}/tree/${branch}`,{
+      const repoName = org && repo? `${org}/${repo}` : process.env.GITHUB_REPOSITORY
+    return await axios.post(`https://circleci.com/api/v1.1/project/github/${repoName}/tree/${branch}`,{
         build_parameters:{
             CIRCLE_JOB : 'build'
         },
