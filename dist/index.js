@@ -995,6 +995,9 @@ const {
 (async () => {
     try {
       const token = core.getInput("token");
+      if(!token){
+        return core.setFailed('Missing CircleCI token');
+      };
       const orgInput = core.getInput("org");
       const repoInput = core.getInput("repo");
       const branchInput = core.getInput("branch");
@@ -1009,25 +1012,33 @@ const {
         branchName
       });
 
-      console.log({
-        res
-      });
+      console.log(`Job ${res.statusText}`);
+      console.log(`Build Number ${res.data.build_num}`);
+      console.log(`Build URL ${res.data.build_url}`);
 
     } catch (error) {
-      core.setFailed(error.message);
+      if(error.response.data && error.response.data.message){
+        core.setFailed(error.response.data.message);
+      }else{
+        core.setFailed(error.message);
+      }
     }
   })();
   
   async function postCircleciAction({ token, repoName, branchName }) {
-    return axios.post(`https://circleci.com/api/v1.1/project/github/${repoName}/tree/${branchName}`,{
+    return await axios.post(`https://circleci.com/api/v1.1/project/github/${repoName}/tree/${branchName}`,{
         build_parameters:{
             CIRCLE_JOB : 'build'
-        },
-        headers: {
-            'Content-Type': 'application/json',
-            'user' : token
+        }},{
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          withCredentials: true,
+          auth:{
+            username:token
+          }
         }
-    });
+    );
   }
 
 /***/ }),
