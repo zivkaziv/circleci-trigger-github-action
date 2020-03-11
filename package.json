@@ -1,0 +1,32 @@
+{
+  "name": "circleci-trigger-github-action",
+  "version": "1.0.0",
+  "description": "github action that triggers circle-ci job",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "github",
+    "actions",
+    "CircleCi",
+    "Hackathon"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zivkaziv/circleci-trigger-github-action.git"
+  },
+  "author": "Ziv Kalderon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zivkaziv/circleci-trigger-github-action/issues"
+  },
+  "homepage": "https://github.com/zivkaziv/circleci-trigger-github-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.3",
+    "axios": "^0.19.2"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0"
+  }
+}

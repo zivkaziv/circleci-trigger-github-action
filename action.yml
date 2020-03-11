@@ -1,0 +1,22 @@
+name: 'GitHub ACtion - Trigger CircleCi Job'
+author: 'Ziv Kalderon
+description: 'Given an option to trigger an existing CircleCi job'
+branding:
+  icon: 'truck'
+  color: 'red'
+inputs:
+  token:
+    description: 'CircleCI Api Token'
+    required: true
+  org:
+    description: 'CircleCI organization name'
+    required: false
+  repo:
+    description: 'Repository name - by default will use the current repository name'
+    required: false
+  branch:
+    description: 'Branch name - by default will use the current branch name'
+    required: false
+runs:
+  using: 'node12'
+  main: 'main.js'
