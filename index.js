@@ -37,11 +37,11 @@ const {
         branchName,
       });
   
-      const res = await postCircleciAction(
+      const res = await postCircleciAction({
         token,
         repoName,
         branchName
-      );
+      });
       console.log({
         res
       });
@@ -51,7 +51,7 @@ const {
     }
   })();
   
-  async function postCircleciAction( token, repo, branch ) {
+  async function postCircleciAction({ token, repoName, branchName }) {
     return await axios.post(`https://circleci.com/api/v1.1/project/github/${repoName}/tree/${branchName}`,{
         build_parameters:{
             CIRCLE_JOB : 'build'
