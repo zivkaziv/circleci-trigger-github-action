@@ -1016,7 +1016,7 @@ const {
       const branchInput = core.getInput("branch");
 
       const repoName = org && repo? `${org}/${repo}` : repo;
-      const branchName = bra;nch.split('/').pop();
+      const branchName = branch.split('/').pop();
       console.log({
         repoName,
         repo,
