@@ -26,41 +26,33 @@ const {
 (async () => {
     try {
       const token = core.getInput("token");
-      const org = core.getInput("org");
+      const orgInput = core.getInput("org");
       const repoInput = core.getInput("repo");
       const branchInput = core.getInput("branch");
 
-      const repoName = org && repo? `${org}/${repo}` : repo;
-      const branchName = branch.split('/').pop();
+      const repoName = org && repoInput? `${orgInput}/${repoInput}` : repo;
+      const branchName = branchInput || branch.split('/').pop();
       console.log({
         repoName,
-        repo,
         branchName,
-        branch,
-        token,
-        org,
-        repoInput,
-        branchInput
       });
   
-    //   const res = await postCircleciAction({
-    //     token,
-    //     org,
-    //     repo,
-    //     branch
-    //   });
-    //   console.log({
-    //     res
-    //   });
+      const res = await postCircleciAction({
+        token,
+        repoName,
+        branchName
+      });
+      console.log({
+        res
+      });
 
     } catch (error) {
       core.setFailed(error.message);
     }
   })();
   
-  async function postCircleciAction({ token, org, repo, branch }) {
-      const repoName = org && repo? `${org}/${repo}` : process.env.GITHUB_REPOSITORY
-    return await axios.post(`https://circleci.com/api/v1.1/project/github/${repoName}/tree/${branch}`,{
+  async function postCircleciAction({ token, repo, branch }) {
+    return await axios.post(`https://circleci.com/api/v1.1/project/github/${repoName}/tree/${branchName}`,{
         build_parameters:{
             CIRCLE_JOB : 'build'
         },
