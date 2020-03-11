@@ -7,17 +7,14 @@ This project deployment workflow uses this action.
 This can be useful when want to migrate from CircleCi into Github actions and you want to do it step by step (e.g. run the first job in github action and then trigger the second job).
 
 Default values would work for the most cases.
-However **token** parameter must be passed to the action explicitly.
-
-
-Actor would also be overridden when pushing to a repo cloud other than GitHub.
+However **org** , **repo** and **branch** can be useful as well.
 
 ## Inputs
 
-- `token`: value for git config user.name (default: `GitHub Action`)
-- `org`: value for git config user.email (default: `github-action@users.noreply.github.com`)
-- `repo`: value used to construct GIT_USER (default: **github.actor**)
-- `branch`: value for git config user.password and GIT_USER
+- `token`: is a [personal API token](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-personal-api-token)
+- `org`: variable and refers to the name of your CircleCI organization (default: `Current repo organization`)
+- `repo`: variable and refers to the name of your repository (default: `Current repo`)
+- `branch`: variable and refers to the name of your branch - (default: `Current Branch`)
 
 ## Outputs
 
@@ -26,31 +23,25 @@ No outputs produced.
 ## Usage Example
 
 ```yaml
-name: Deployment
+name: Trigger CircleCi job
+
 on:
   push:
-    branches:
-      - master
+      branches:
+        - master
+
 jobs:
-  publish:
-    - uses: actions/checkout@v2
-    # publish to a branch in current repo using GITHUB_TOKEN and other default settings
-    - uses: oleksiyrudenko/gha-git-credentials@v1
-      with:
-        token: '${{ secrets.GITHUB_TOKEN }}'
-    - run: |
-        yarn run build
-        yarn run deploy
-    # publish to a branch in different repo using a PAT generated on that other repo
-    - uses: oleksiyrudenko/gha-git-credentials@v1
-      with:
-        name: 'Oleksiy Rudenko'
-        email: 'oleksiy.rudenko@domain.com'
-        actor: 'OleksiyRudenko'
-        token: '${{ secrets.GH_PAT_WEB_CENTRAL }}'
-    - run: |
-        git remote add web-central https://github.com/some-organization/website.git
-        yarn run deploy web-central/master
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Trigger exiting circleci job
+        uses: zivkaziv/circleci-trigger-github-action@master
+        with:
+          token: ${{ secrets.CIRCLE_CI_TOKEN }}
+          branch: master
 ```
 
 ## License
