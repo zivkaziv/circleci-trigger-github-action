@@ -1,5 +1,5 @@
 name: 'GitHub ACtion - Trigger CircleCi Job'
-author: 'Ziv Kalderon
+author: 'Ziv Kalderon'
 description: 'Given an option to trigger an existing CircleCi job'
 branding:
   icon: 'truck'
