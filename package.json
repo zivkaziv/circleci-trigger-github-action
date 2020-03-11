@@ -4,7 +4,8 @@
   "description": "github action that triggers circle-ci job",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build" : "ncc build index.js -o dist"
   },
   "keywords": [
     "github",
@@ -28,6 +29,7 @@
     "dotenv": "^8.2.0"
   },
   "devDependencies": {
+    "@zeit/ncc": "^0.21.1",
     "jest": "^25.1.0"
   }
 }
