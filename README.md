@@ -2,8 +2,6 @@
 
 [GitHub Action](https://github.com/features/actions) for triggering CircleCi job
 
-This project deployment workflow uses this action.
-
 This can be useful when you want to migrate from CircleCi into Github actions and you want to do it step by step (e.g. run the first job in github actions and then trigger the second job).
 
 ## Inputs
@@ -32,7 +30,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Trigger exiting circleci job
-        uses: zivkaziv/circleci-trigger-github-action@master
+        uses: simonhkswan/circleci-trigger-github-action
         with:
           token: ${{ secrets.CIRCLE_CI_TOKEN }}
           branch: master
