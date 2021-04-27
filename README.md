@@ -1,24 +1,18 @@
-# CircleCI job trigger GitHub Action
+# Trigger CircleCI Job
 
 [GitHub Action](https://github.com/features/actions) for triggering CircleCi job
 
 This project deployment workflow uses this action.
 
-This can be useful when want to migrate from CircleCi into Github actions and you want to do it step by step (e.g. run the first job in github action and then trigger the second job).
-
-Default values would work for the most cases.
-However **org** , **repo** and **branch** can be useful as well.
+This can be useful when you want to migrate from CircleCi into Github actions and you want to do it step by step (e.g. run the first job in github actions and then trigger the second job).
 
 ## Inputs
 
 - `token`: is a [personal API token](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-personal-api-token)
-- `org`: variable and refers to the name of your CircleCI organization (default: `Current repo organization`)
-- `repo`: variable and refers to the name of your repository (default: `Current repo`)
-- `branch`: variable and refers to the name of your branch - (default: `Current Branch`)
-
-## Outputs
-
-No outputs produced.
+- `org`: variable that refers to the name of your CircleCI organization (default: `Current repo organization`)
+- `repo`: variable that refers to the name of your repository (default: `Current repo`)
+- `branch`: variable that refers to the name of your branch (default: `Current Branch`)
+- `job`: variable that refers to the name of the CircleCI job
 
 ## Usage Example
 
@@ -42,6 +36,7 @@ jobs:
         with:
           token: ${{ secrets.CIRCLE_CI_TOKEN }}
           branch: master
+          job: build-and-deploy
 ```
 
 ## License
