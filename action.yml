@@ -17,6 +17,9 @@ inputs:
   branch:
     description: 'Branch name - by default will use the current branch name'
     required: false
+  job:
+    description: 'CircleCI job name'
+    required: true
 runs:
   using: 'node12'
   main: './dist/index.js'
