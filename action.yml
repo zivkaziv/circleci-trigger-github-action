@@ -1,9 +1,9 @@
-name: 'GitHub ACtion - Trigger CircleCi Job'
-author: 'Ziv Kalderon'
-description: 'Given an option to trigger an existing CircleCi job'
+name: 'Trigger CircleCI Job'
+author: 'Simon Swan'
+description: 'Trigger a specific CircleCi job. Code modified from zivkaziv/circleci-trigger-github-action.'
 branding:
   icon: 'truck'
-  color: 'red'
+  color: 'purple'
 inputs:
   token:
     description: 'CircleCI Api Token'
