@@ -25,7 +25,7 @@
   "homepage": "https://github.com/zivkaziv/circleci-trigger-github-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.6",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "dotenv": "^8.2.0"
   },
   "devDependencies": {
