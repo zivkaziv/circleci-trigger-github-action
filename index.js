@@ -16,15 +16,17 @@ const {
       const orgInput = core.getInput("org");
       const repoInput = core.getInput("repo");
       const branchInput = core.getInput("branch");
-
+      
+      const jobName = core.getInput("job");  
       const repoName = orgInput && repoInput? `${orgInput}/${repoInput}` : repo;
       const branchName = branchInput || (branch && branch.split('/').pop());
   
-      console.log(`Triggering CircleCi job ${repoName} - ${branchName}`)
+      console.log(`Triggering CircleCi job ${jobName} for ${repoName} - ${branchName}`)
       const res = await postCircleciAction({
         token,
         repoName,
-        branchName
+        branchName,
+        jobName,
       });
 
       console.log(`Job ${res.statusText}`);
@@ -40,10 +42,10 @@ const {
     }
   })();
   
-  async function postCircleciAction({ token, repoName, branchName }) {
+  async function postCircleciAction({ token, repoName, branchName, jobName }) {
     return await axios.post(`https://circleci.com/api/v1.1/project/github/${repoName}/tree/${branchName}`,{
         build_parameters:{
-            CIRCLE_JOB : 'build'
+            CIRCLE_JOB : jobName
         }},{
           headers: {
               'Content-Type': 'application/json',
